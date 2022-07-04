@@ -9,8 +9,8 @@ var chokidar = require('chokidar');
 
 const hostfs = 'file:///c:/Users/ricar/Documents/Projectos/workspace-orchestrator/';
 
-const hostname = '0.0.0.0';
-const port = 3010;
+var hostname = '0.0.0.0';
+var port = 3010;
 process.argv.forEach(function (val, index, array) {
     console.log(index + ': ' + val);
     switch (index) {
