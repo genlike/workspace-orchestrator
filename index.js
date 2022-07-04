@@ -1,13 +1,11 @@
 require('log-timestamp');
 const express = require('express');
-const mysql = require('mysql');
 const pg = require('pg');
-const http = require('http');
 var fs = require('fs');
-const request = require('request');
-var uuid = require('uuid');                        
+var uuid = require('uuid');
 var getDirName = require('path').dirname;
 var requestIp = require('request-ip');
+var chokidar = require('chokidar');
 
 const hostfs = 'file:///c:/Users/ricar/Documents/Projectos/workspace-orchestrator/';
 
@@ -19,35 +17,35 @@ const remoteServerAddress = "192.168.1.120";
 const app = express();
 
 
-const db = mysql.createConnection({
-    host:       'localhost',
-    user:       'root',
-    password:   'rootroot'
-});
+// const db = pg.createConnection({
+//     host:       'localhost',
+//     user:       'root',
+//     password:   'rootroot'
+// });
 
-db.connect(err => {
-    if(err) throw err;
-    console.log('MySql Succesfully connected');
-});
+// db.connect(err => {
+//     if(err) throw err;
+//     console.log('MySql Succesfully connected');
+// });
 
 
-var chokidar = require('chokidar');
+
 
 function createWatcher(path){
     var watcher = chokidar.watch(path, {ignored: /^\./, persistent: true});
     watcher
     .on('add', function(path) {
         console.log('File', path, 'has been added');
-        addFileToDb(path);
+        //addFileToDb(path);
     })
     .on('change', function(path) {
        
         console.log('File', path, 'has been changed');
-        readFileToUpdate(path);
+        //readFileToUpdate(path);
     })
     .on('unlink', function(path) {
         console.log('File', path, 'has been removed');
-        deleteFileFromDb(path);
+        //deleteFileFromDb(path);
     })
     .on('error', function(error) {console.error('Error happened', error);});
     return watcher;
@@ -115,7 +113,7 @@ function createWorkspace(ip){
          if (err) throw err;
      });
     currentEditors[ip] = [hostfs + randomFoldername, Date.now(), createWatcher(randomFoldername)];
-    pullFilesFromDb(randomFoldername,3);
+    //pullFilesFromDb(randomFoldername,3);
 }
 
 function pullFilesFromDb(path, param){
@@ -226,8 +224,8 @@ app.get('/createTempWorkspace', (req, res) => {
     let ip = requestIp.getClientIp(req);
 
     createWorkspace(ip);
-    res.statusCode = 301;
-    res.redirect('http://' + remoteServerAddress + ':3000/');
+    res.statusCode = 200;
+    //res.redirect('http://' + remoteServerAddress + ':3000/');
     res.end();
 
 });
@@ -238,7 +236,7 @@ app.get('/testCommunication', (req, res) => {
     // filename = filename.substring(filename.length -100);
     console.log("trying to update in db " + filename);
 
-    readFileToUpdate(filename);
+    //readFileToUpdate(filename);
 // let status = req.query.status;
 // // console.log(status);
 // switch (status) {
@@ -280,7 +278,7 @@ app.get('/ping', (req, res) => {
     //console.log(currentEditors);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
-    res.send("deleted workspace of" + ip);
+    res.send("detected workspace of" + ip);
     res.end();
 
 });
