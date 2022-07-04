@@ -23,11 +23,6 @@ const app = express();
 //     password:   'rootroot'
 // });
 
-// db.connect(err => {
-//     if(err) throw err;
-//     console.log('MySql Succesfully connected');
-// });
-
 
 
 
