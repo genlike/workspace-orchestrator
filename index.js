@@ -11,6 +11,23 @@ const hostfs = 'file:///c:/Users/ricar/Documents/Projectos/workspace-orchestrato
 
 const hostname = '0.0.0.0';
 const port = 3010;
+process.argv.forEach(function (val, index, array) {
+    console.log(index + ': ' + val);
+    switch (index) {
+        case 2:
+            hostname = val;
+            break;
+        case 3:
+            port = parseInt(val);
+            break;
+        
+        default:
+            break;
+    }
+  });
+
+
+
 
 const remoteServerAddress = "192.168.1.120";
 
