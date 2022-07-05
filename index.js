@@ -1,37 +1,10 @@
 require('log-timestamp');
-const express = require('express');
 const pg = require('pg');
 var fs = require('fs');
 var uuid = require('uuid');
 var getDirName = require('path').dirname;
 var requestIp = require('request-ip');
 var chokidar = require('chokidar');
-
-const hostfs = 'file:///c:/Users/ricar/Documents/Projectos/workspace-orchestrator/';
-
-var hostname = '0.0.0.0';
-var port = 3010;
-process.argv.forEach(function (val, index, array) {
-    console.log(index + ': ' + val);
-    switch (index) {
-        case 2:
-            hostname = val;
-            break;
-        case 3:
-            port = parseInt(val);
-            break;
-        
-        default:
-            break;
-    }
-  });
-
-
-
-
-const remoteServerAddress = "192.168.1.120";
-
-const app = express();
 
 
 // const db = pg.createConnection({
@@ -92,30 +65,6 @@ setInterval(() =>
         }
       }
 }, 60000);
-
-app.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://' + remoteServerAddress + ':3000');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    // Pass to next layer of middleware
-    next();
-});
-
-
-app.listen(port, hostname, () => {
-    console.log('Server started at port ' + port)
-})
 
 
 function createWorkspace(ip){
@@ -228,47 +177,6 @@ function addFileToDb(filename){
     
 }
 
-
-
-
-
-app.get('/createTempWorkspace', (req, res) => {
-    let ip = requestIp.getClientIp(req);
-
-    createWorkspace(ip);
-    res.statusCode = 200;
-    //res.redirect('http://' + remoteServerAddress + ':3000/');
-    res.end();
-
-});
-
-
-app.get('/testCommunication', (req, res) => {
-    let filename = req.query.filename;
-    // filename = filename.substring(filename.length -100);
-    console.log("trying to update in db " + filename);
-
-    //readFileToUpdate(filename);
-// let status = req.query.status;
-// // console.log(status);
-// switch (status) {
-//     case '1':
-//         console.log("STATUS CODE 1");
-//         break;
-//     case '2':
-//         console.log("STATUS CODE 2");
-//             break;
-//     default:
-//         break;
-// }
-
-res.statusCode = 200;
-res.setHeader('Content-Type', 'text/plain');
-res.send("Test Communication");
-res.end();
-
-});
-
 app.get('/getWorkspace', (req, res) => {
     let ip = requestIp.getClientIp(req);
     console.log(currentEditors);
@@ -280,17 +188,4 @@ app.get('/getWorkspace', (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     res.send(currentEditors[ip][0]);
     res.end();
-});
-
-
-app.get('/ping', (req, res) => {
-    let ip = requestIp.getClientIp(req);
-    //console.log("PING FROM");
-    if(currentEditors[ip]) currentEditors[ip][1] =  Date.now();
-    //console.log(currentEditors);
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.send("detected workspace of" + ip);
-    res.end();
-
 });

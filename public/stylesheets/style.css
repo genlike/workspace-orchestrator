@@ -1,0 +1,85 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.main {
+  background-color:thistle;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.main > .files {
+  position: absolute;
+  top: 5%;
+  bottom: 0px;
+  left:0px;
+  right: 80%;
+  background-color: #151516;
+  border: black;
+  
+}
+
+.main > .menubar {
+  position: absolute;
+  top: 0px;
+  bottom: 95%;
+  left:0px;
+  right: 0px;
+  background-color: #282828;
+  border: black;
+}
+
+.main > .content {
+  position: absolute;
+  top: 5%;
+  bottom: 0px;
+  left:20%;
+  right: 0px;
+  border: black;
+  background-color: #101010;
+}
+
+.files > h1 {
+  color: white;
+  text-align: center;
+}
+
+.files > ul {
+  list-style-type: none;
+  padding: 0px;
+  font-size: medium;
+}
+
+.files > ul >  li {
+  text-decoration: none;
+  color: white;
+  padding-left: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.files > ul > li > img {
+  
+  width: 15px;
+  padding-right: 5px;
+}
+
+.files > ul > li:hover{
+  background-color: #2c2c2c;
+  
+}
+
+#xtext-editor {
+  height: 100%;
+  
+}

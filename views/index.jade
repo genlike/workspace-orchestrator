@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .main 
+    .menubar
+    .files
+      h1 Workspace #{workspaceName}
+      ul
+        each file in filesList 
+          li
+            - if (file.type == 'fldr')
+              img(src='/images/folder.png')
+            | #{file.name}
+    .content
+      #xtext-editor(
+        data-editor-enable-save-action="true"
+        data-editor-enable-formatting-action="true"
+        )
+    script(src='/javascripts/require.js')
+    script(src='/javascripts/jquery-3.6.0.min.js')
+    script 
+      include index.js
