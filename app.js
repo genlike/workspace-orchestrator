@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 
 app.use('/', indexRouter);
-app.use('/xtext-service', xtextService);
+//app.use('/xtext-service', xtextService);
 
 
 // catch 404 and forward to error handler
@@ -42,7 +42,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const languageServerPath = path.resolve(process.cwd(), "./language_server/language_server.jar");
-LanguageServerService.startLanguageServer(languageServerPath, 3010);
+//const languageServerPath = path.resolve(process.cwd(), "./language_server/language_server.jar");
+//LanguageServerService.startLanguageServer(languageServerPath, 3010);
 
 module.exports = app;
