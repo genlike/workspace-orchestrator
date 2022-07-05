@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
-
+var cors = require('cors');
 var indexRouter = require('./routes/index');
 var xtextService = require('./routes/xtext-service');
 
@@ -25,6 +25,11 @@ app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 app.use('/', indexRouter);
 //app.use('/xtext-service', xtextService);
 
+var corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+app.use(cors(corsOptions))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
