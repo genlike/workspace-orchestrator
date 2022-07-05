@@ -1,0 +1,25 @@
+Notes
+
+Systema de pastas:
+
+    Pasta
+        Pasta
+        Pasta
+        Pasta
+        Ficheiro
+        Ficheiro
+
+Quando clica numa pasta da reset da view
+ e coloca a pasta como root
+
+Isto tera de ser manipulado por javascript.
+
+
+
+3 tarefas para fazer:
+
+1 - colocar o editor a funcionar na div
+2 - gerar novo xtext server 
+    com um port especificado por argv
+3 - ter um servico no backend que liga se
+    liga a este backend server 

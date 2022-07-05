@@ -8,7 +8,8 @@ var favicon = require('serve-favicon');
 var indexRouter = require('./routes/index');
 
 var app = express();
-
+const config = require('./config/config.js');
+const LanguageServerService = require('./services/LanguageServerService.js');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

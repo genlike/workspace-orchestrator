@@ -6,7 +6,9 @@
 var app = require('../app');
 var debug = require('debug')('workspace-orchestrator:server');
 var http = require('http');
-
+const path = require('path');
+const config = require('../config/config.js')
+const LanguageServerService = require('../services/LanguageServerService.js')
 /**
  * Get port from environment and store in Express.
  */
@@ -19,6 +21,10 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+const languageServerPath = path.resolve(process.cwd(), "./language_server/language_server.jar");
+LanguageServerService.startLanguageServer(languageServerPath, 3010);
+
 
 /**
  * Listen on provided port, on all network interfaces.
