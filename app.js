@@ -6,6 +6,7 @@ var logger = require('morgan');
 var favicon = require('serve-favicon');
 
 var indexRouter = require('./routes/index');
+var xtextService = require('./routes/xtext-service');
 
 var app = express();
 const config = require('./config/config.js');
@@ -22,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 
 app.use('/', indexRouter);
+app.use('/xtext-service', xtextService);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,5 +41,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const languageServerPath = path.resolve(process.cwd(), "./language_server/language_server.jar");
+LanguageServerService.startLanguageServer(languageServerPath, 3010);
 
 module.exports = app;

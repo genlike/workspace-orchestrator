@@ -22,10 +22,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-const languageServerPath = path.resolve(process.cwd(), "./language_server/language_server.jar");
-LanguageServerService.startLanguageServer(languageServerPath, 3010);
-
-
 /**
  * Listen on provided port, on all network interfaces.
  */

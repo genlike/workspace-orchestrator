@@ -25,6 +25,7 @@ module.exports = {
           // Waiting for the string that indicates the successfull start
           if (/(.)*INFO(.)*Server started(.)*/.test(data)) {
             resolve()
+            console.log(`stdout: ${data}`);
           }
         })
 

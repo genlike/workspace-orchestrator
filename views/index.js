@@ -11,10 +11,9 @@ require(["webjars/ace/1.3.3/src/ace"], function() {
     require(["xtext/xtext-ace"], function(xtext) {
         var editor = xtext.createEditor(
             {
-                baseUrl: '/',
-                serviceUrl: 'http://localhost:3000/xtext-sericve',
-                syntaxDefinition: 'xtext-resources/generated/mode-rsl.js',
-                enableCors: true
+                baseUrl: '/xtext-service',
+                serviceUrl: 'http://localhost:3000/xtext-service',
+                syntaxDefinition: 'xtext-resources/generated/mode-rsl.js'
             });
         editor.setTheme("ace/theme/monokai");
 
