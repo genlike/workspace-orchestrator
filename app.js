@@ -26,7 +26,7 @@ app.use('/', indexRouter);
 //app.use('/xtext-service', xtextService);
 
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3010',
   optionsSuccessStatus: 200 // For legacy browser support
 }
 app.use(cors(corsOptions))
